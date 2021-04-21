@@ -59,6 +59,19 @@
 (add-hook 'c-mode-hook 'add-c-keys)
 (add-hook 'c-mode-hook 'c-format-on-save)
 
+; lsp ui
+(add-hook 'c-mode-hook 'lsp-ui-mode)
+
+; lsp sideline
+(setq lsp-ui-sideline-show-diagnostics nil)
+(setq lsp-ui-sideline-show-hover t)
+(setq lsp-ui-sideline-show-code-actions t)
+(setq lsp-ui-sideline-delay 0)
+
+; lsp doc
+(setq lsp-ui-doc-enable t)
+(setq lsp-ui-doc-delay 0)
+
 (require 'use-package)
 
 (use-package lsp-ui)
@@ -88,3 +101,18 @@
   (setq dashboard-startup-banner "~/.emacs.d/logo.txt")
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t))
+
+(load-theme 'srcery t)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("8bb9cbdc1fe6f4451b1e1361113cd6e24b784f82f33a0f4d6c5f8991aa32b28c" default)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
