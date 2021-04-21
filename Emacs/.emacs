@@ -1,56 +1,63 @@
-;;; package --- Summary
-;;; Commentary:
 (require 'package)
-
-;;; Code:
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
-(unless (package-installed-p 'use-package)
+
+(setq package-selected-packages '(lsp-mode yasnippet lsp-treemacs helm-lsp
+					   projectile hydra flycheck company avy which-key helm-xref dap-mode))
+
+(when (cl-find-if-not #'package-installed-p package-selected-packages)
   (package-refresh-contents)
-  (package-install 'use-package))
-(use-package try :ensure t)
-(use-package which-key :ensure t :config (which-key-mode))
+  (mapc #'package-install package-selected-packages))
 
-(require 'yasnippet)
-(yas-global-mode 1)
+(helm-mode)
+(require 'helm-xref)
+(define-key global-map [remap find-file] #'helm-find-files)
+(define-key global-map [remap execute-extended-command] #'helm-M-x)
+(define-key global-map [remap switch-to-buffer] #'heml-mini)
 
-(use-package auto-complete
-  :ensure t
-  :init
-  (progn
-    (ac-config-default)
-    (global-auto-complete-mode t)
-    ))
+(which-key-mode)
+(add-hook 'c-mode-hook 'lsp)
+(add-hook 'c++-mode-hook 'lsp)
 
-(use-package auto-complete
-  :ensure t
-  :init
-  (global-flycheck-mode t))
+(setq gc-cons-treshold (* 100 1024 1024)
+      read-process-output-max (* 1024 1024)
+      treemacs-space-between-root-nodes nil
+      company-idle-delay 0.0
+      company-minimum-prefix-length 1
+      lsp-idle-delay 0.1)
 
-(use-package magit
-  :ensure t
-  :init
-  (progn
-    (bind-key "C-x g" 'magit-status)))
+(with-eval-after-load 'lsp-mode
+  (add-hook 'lsp-mode-hook #'ls-enable-which-key-integration)
+  (require 'dap-cpptools)
+  (yas-global-mode))
 
-(use-package neotree
-  :ensure t
-  :init
-  (progn
-    (bind-key "<f8>" 'neotree-toggle)))
+; Open treemacs when the <f8> key is pressed
+(bind-key "<f8>" 'treemacs)
 
-(require 'clang-format)
-(setq clang-format-style "gnu")
+; Mapped some lsp keybinds
+(defun add-c-keys()
+  (local-set-key (kbd "M-l r") 'lsp-rename) ; Rename symbol/function at point
+  (local-set-key (kbd "M-l g g") 'xref-find-definitions) ; Find definitions
+  (local-set-key (kbd "M-l g r") 'xref-find-references) ; Find references
+  (local-set-key (kbd "M-l h i") 'helm-imenu) ; Browse symbols in the current document
+  (local-set-key (kbd "M-l h w") 'helm-lsp-workspace-symbol) ; Find symbol in current project
+  (local-set-key (kbd "M-l s d") 'lsp-describe-thing-at-point) ; Describes thing at point
+  )
 
-(defun clang-format-on-save()
-  ;;; "Adds a hook so the code is formatted before its content is written to a file"
-  (add-hook 'before-save-hook #'clang-format-buffer nil 'local))
-(add-hook 'c-mode-hook 'clang-format-on-save)
-(add-hook 'c++-mode-hook 'clang-format-on-save)
+; Before saving, format the code
+(defun c-format-on-save()
+  (add-hook 'before-save-hook #'lsp-format-buffer nil 'local))
+
+; Add some hooks
+(add-hook 'c-mode-hook 'add-c-keys)
+(add-hook 'c-mode-hook 'c-format-on-save)
+
+(require 'use-package)
+
+(use-package lsp-ui)
 
 (setq inhibit-splash-screen t)
-(setq inhibit-startup-message t)
+(setq inhibit-startup-screen t)
 
 (menu-bar-mode -1)
 
@@ -59,13 +66,18 @@
 (setq whitespace-style '(face empty tabs lines-tail trailing))
 (add-hook 'prog-mode-hook 'whitespace-mode)
 
+(use-package magit
+  :ensure t
+  :init
+  (progn
+    (bind-key "C-x g" 'magit-status)))
+
 (use-package dashboard
   :ensure t
   :init
   (dashboard-setup-startup-hook)
   (setq dashboard-items '((recents . 5)
 			  (bookmarks . 5)))
-  (setq dashboard-startup-banner 'logo)
-  (setq dashboard-startup-banner "~/.emacs.d/img/logo.png")
+  (setq dashboard-startup-banner "~/.emacs.d/logo.txt")
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t))
