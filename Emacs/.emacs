@@ -3,7 +3,8 @@
 (package-initialize)
 
 (setq package-selected-packages '(lsp-mode yasnippet lsp-treemacs helm-lsp
-					   projectile hydra flycheck company avy which-key helm-xref dap-mode))
+					   projectile hydra flycheck company avy
+					   which-key helm-xref dap-mode))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
   (package-refresh-contents)
@@ -36,12 +37,18 @@
 
 ; Mapped some lsp keybinds
 (defun add-c-keys()
-  (local-set-key (kbd "M-l r") 'lsp-rename) ; Rename symbol/function at point
-  (local-set-key (kbd "M-l g g") 'xref-find-definitions) ; Find definitions
-  (local-set-key (kbd "M-l g r") 'xref-find-references) ; Find references
-  (local-set-key (kbd "M-l h i") 'helm-imenu) ; Browse symbols in the current document
-  (local-set-key (kbd "M-l h w") 'helm-lsp-workspace-symbol) ; Find symbol in current project
-  (local-set-key (kbd "M-l s d") 'lsp-describe-thing-at-point) ; Describes thing at point
+					; Rename symbol/function at point
+  (local-set-key (kbd "M-l r") 'lsp-rename)
+					; Find definitions
+  (local-set-key (kbd "M-l g g") 'xref-find-definitions)
+					; Find references
+  (local-set-key (kbd "M-l g r") 'xref-find-references)
+					; Browse symbols in the current document
+  (local-set-key (kbd "M-l h i") 'helm-imenu)
+					; Find symbol in current project
+  (local-set-key (kbd "M-l h w") 'helm-lsp-workspace-symbol)
+					; Describes thing at point
+  (local-set-key (kbd "M-l s d") 'lsp-describe-thing-at-point)
   )
 
 ; Before saving, format the code
