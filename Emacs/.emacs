@@ -1,5 +1,6 @@
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
 (setq package-selected-packages '(lsp-mode yasnippet lsp-treemacs helm-lsp
@@ -33,7 +34,7 @@
   (yas-global-mode))
 
 ; Open treemacs when the <f8> key is pressed
-(bind-key "<f8>" 'treemacs)
+(global-set-key [f8] 'treemacs)
 
 ; Include clang-format
 (require 'clang-format)
@@ -91,5 +92,36 @@
   (setq dashboard-set-file-icons t))
 
 ; Load a theme
-(load-theme 'srcery t)
+;(load-theme 'srcery t)
+
+(use-package all-the-icons)
+
+(require 'treemacs-all-the-icons)
+(treemacs-load-theme "all-the-icons")
+
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+
+(use-package doom-themes
+  :config
+  ;; Global settings
+  (setq doom-themes-enable-bold t
+	doom-themes-enable-italic t)
+  (load-theme 'doom-vibrant t)
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+
+  ;;Enable custom treemacs theme
+  (setq doom-themes-treemacs-theme "doom-colors")
+  (doom-themes-treemacs-config)
+
+  (doom-themes-org-config))
+
+; Treemacs-magit
+(use-package treemacs-magit
+  :after (treemacs magit)
+  :ensure t)
+
 ;;; .emacs file end
