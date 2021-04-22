@@ -14,7 +14,7 @@
 (require 'helm-xref)
 (define-key global-map [remap find-file] #'helm-find-files)
 (define-key global-map [remap execute-extended-command] #'helm-M-x)
-(define-key global-map [remap switch-to-buffer] #'heml-mini)
+(define-key global-map [remap switch-to-buffer] #'helm-mini)
 
 (which-key-mode)
 (add-hook 'c-mode-hook 'lsp)
@@ -35,29 +35,19 @@
 ; Open treemacs when the <f8> key is pressed
 (bind-key "<f8>" 'treemacs)
 
-; Mapped some lsp keybinds
-(defun add-c-keys()
-					; Rename symbol/function at point
-  (local-set-key (kbd "M-l r") 'lsp-rename)
-					; Find definitions
-  (local-set-key (kbd "M-l g g") 'xref-find-definitions)
-					; Find references
-  (local-set-key (kbd "M-l g r") 'xref-find-references)
-					; Browse symbols in the current document
-  (local-set-key (kbd "M-l h i") 'helm-imenu)
-					; Find symbol in current project
-  (local-set-key (kbd "M-l h w") 'helm-lsp-workspace-symbol)
-					; Describes thing at point
-  (local-set-key (kbd "M-l s d") 'lsp-describe-thing-at-point)
-  )
+; Include clang-format
+(require 'clang-format)
+(setq clang-format-style "gnu")
 
 ; Before saving, format the code
 (defun c-format-on-save()
-  (add-hook 'before-save-hook #'lsp-format-buffer nil 'local))
+  (add-hook 'before-save-hook #'clang-format-buffer nil 'local))
 
-; Add some hooks
-(add-hook 'c-mode-hook 'add-c-keys)
 (add-hook 'c-mode-hook 'c-format-on-save)
+
+(require 'use-package)
+
+(use-package lsp-ui)
 
 ; lsp ui
 (add-hook 'c-mode-hook 'lsp-ui-mode)
@@ -72,14 +62,12 @@
 (setq lsp-ui-doc-enable t)
 (setq lsp-ui-doc-delay 0)
 
-(require 'use-package)
-
-(use-package lsp-ui)
-
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-screen t)
 
 (menu-bar-mode -1)
+(toggle-scroll-bar -1)
+(tool-bar-mode -1)
 
 (require 'whitespace)
 (setq whitespace-line-column 80)
@@ -102,17 +90,6 @@
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t))
 
+; Load a theme
 (load-theme 'srcery t)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("8bb9cbdc1fe6f4451b1e1361113cd6e24b784f82f33a0f4d6c5f8991aa32b28c" default)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;;; .emacs file end
