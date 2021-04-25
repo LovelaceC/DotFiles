@@ -86,8 +86,10 @@
   :init
   (dashboard-setup-startup-hook)
   (setq dashboard-items '((recents . 5)
-			  (bookmarks . 5)))
-  (setq dashboard-startup-banner "~/.emacs.d/logo.txt")
+			  (bookmarks . 5)
+			  (projects . 5)))
+  (setq dashboard-banner-logo-title "Real programers use Emacs :carita facherita fachera:")
+  (setq dashboard-startup-banner "~/.emacs.d/lain.png")
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t))
 
@@ -98,6 +100,7 @@
 
 (require 'treemacs-all-the-icons)
 (treemacs-load-theme "all-the-icons")
+(treemacs-resize-icons 20)
 
 (use-package doom-modeline
   :ensure t
