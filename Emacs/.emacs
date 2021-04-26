@@ -89,7 +89,7 @@
 			  (bookmarks . 5)
 			  (projects . 5)))
   (setq dashboard-banner-logo-title "Real programers use Emacs :carita facherita fachera:")
-  (setq dashboard-startup-banner "~/.emacs.d/lain.png")
+  (setq dashboard-startup-banner "~/.emacs.d/aishindou.png")
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t))
 
@@ -128,3 +128,9 @@
   :ensure t)
 
 ;;; .emacs file end
+
+; Emmet mode
+(require 'emmet-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Markup modes
+(add-hook 'css-mode-hook 'emmet-mode) ;; CSS
+(add-hook 'html-mode-hook 'emmet-mode)
