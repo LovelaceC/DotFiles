@@ -3,7 +3,7 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
-(setq package-selected-packages '(lsp-mode yasnippet lsp-treemacs helm-lsp
+(setq package-selected-packages '(lsp-mode lsp-treemacs helm-lsp
 					   projectile hydra flycheck company avy
 					   which-key helm-xref dap-mode))
 
