@@ -31,7 +31,7 @@
 (with-eval-after-load 'lsp-mode
   (add-hook 'lsp-mode-hook #'ls-enable-which-key-integration)
   (require 'dap-cpptools)
-  (yas-global-mode))
+  )
 
 ; Open treemacs when the <f8> key is pressed
 (global-set-key [f8] 'treemacs)
@@ -93,9 +93,6 @@
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t))
 
-; Load a theme
-;(load-theme 'srcery t)
-
 (use-package all-the-icons)
 
 (require 'treemacs-all-the-icons)
@@ -105,6 +102,14 @@
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1))
+
+(setq doom-modeline-project-detection 'project)
+(setq doom-modeline-icon (display-graphic-p))
+(setq doom-modeline-major-mode-icon t)
+(setq doom-modeline-enable-word-count t)
+(setq doom-modeline-indent-info t)
+(setq doom-modeline-lsp t)
+(setq doom-modeline-env-version t)
 
 (use-package doom-themes
   :config
@@ -117,8 +122,8 @@
   (doom-themes-visual-bell-config)
 
   ;;Enable custom treemacs theme
-  (setq doom-themes-treemacs-theme "doom-colors")
-  (doom-themes-treemacs-config)
+  ;(setq doom-themes-treemacs-theme "doom-colors")
+  ;(doom-themes-treemacs-config)
 
   (doom-themes-org-config))
 
@@ -127,10 +132,13 @@
   :after (treemacs magit)
   :ensure t)
 
-;;; .emacs file end
-
 ; Emmet mode
 (require 'emmet-mode)
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Markup modes
 (add-hook 'css-mode-hook 'emmet-mode) ;; CSS
 (add-hook 'html-mode-hook 'emmet-mode)
+
+; Display lines
+(global-display-line-numbers-mode)
+
+;;; .emacs file end
