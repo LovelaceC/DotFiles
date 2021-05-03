@@ -1,3 +1,7 @@
 XTerm*metaSendsEscape: true
 XTerm*background: black
 XTerm*foreground: white
+
+URxvt*background: black
+URxvt*foreground: white
+URxvt*scrollBar: False

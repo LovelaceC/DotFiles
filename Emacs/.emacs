@@ -95,9 +95,9 @@
 
 (use-package all-the-icons)
 
-(require 'treemacs-all-the-icons)
-(treemacs-load-theme "all-the-icons")
-(treemacs-resize-icons 20)
+;(require 'treemacs-all-the-icons)
+;(treemacs-load-theme "all-the-icons")
+;(treemacs-resize-icons 20)
 
 (use-package doom-modeline
   :ensure t
@@ -136,7 +136,7 @@
 (require 'emmet-mode)
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Markup modes
 (add-hook 'css-mode-hook 'emmet-mode) ;; CSS
-(add-hook 'html-mode-hook 'emmet-mode)
+(add-hook 'html-mode-hook 'emmet-mode) ;; HTML Mode
 
 ; Display lines
 (global-display-line-numbers-mode)
