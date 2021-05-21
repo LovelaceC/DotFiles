@@ -139,8 +139,8 @@
 (add-hook 'html-mode-hook 'emmet-mode) ;; HTML Mode
 
 ; Display lines
-(global-display-line-numbers-mode)
-(global-display-fill-column-indicator-mode)
+;(global-display-line-numbers-mode)
+;(global-display-fill-column-indicator-mode)
 
 ; Display column
 (add-hook 'prog-mode-hook 'column-number-mode)
