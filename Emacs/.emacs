@@ -95,12 +95,6 @@
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t))
 
-(use-package all-the-icons)
-
-;(require 'treemacs-all-the-icons)
-;(treemacs-load-theme "all-the-icons")
-;(treemacs-resize-icons 20)
-
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1))
@@ -141,7 +135,7 @@
 (add-hook 'html-mode-hook 'emmet-mode) ;; HTML Mode
 
 ; Display lines
-;(global-display-line-numbers-mode)
+(global-display-line-numbers-mode)
 ;(global-display-fill-column-indicator-mode)
 
 ; Display column
