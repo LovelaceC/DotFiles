@@ -3,9 +3,11 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
-(setq package-selected-packages '(lsp-mode lsp-treemacs helm-lsp
-					   projectile hydra flycheck company avy
-					   which-key helm-xref dap-mode))
+(setq package-selected-packages '(lsp-mode lsp-treemacs helm-lsp yasnippet
+					   yasnippet-snippets projectile hydra
+					   flycheck company avy which-key
+					   helm-xref dap-mode use-package
+					   emmet-mode lsp-ui doom-themes))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
   (package-refresh-contents)
@@ -37,12 +39,12 @@
 (global-set-key [f8] 'treemacs)
 
 ; Include clang-format
-(require 'clang-format)
-(setq clang-format-style "gnu")
+;(require 'clang-format)
+;(setq clang-format-style "gnu")
 
 ; Before saving, format the code
-(defun c-format-on-save()
-  (add-hook 'before-save-hook #'clang-format-buffer nil 'local))
+;(defun c-format-on-save()
+;  (add-hook 'before-save-hook #'clang-format-buffer nil 'local))
 
 (add-hook 'c-mode-hook 'c-format-on-save)
 
@@ -67,8 +69,8 @@
 (setq inhibit-startup-screen t)
 
 (menu-bar-mode -1)
-(toggle-scroll-bar -1)
-(tool-bar-mode -1)
+;(toggle-scroll-bar -1)
+;(tool-bar-mode -1)
 
 (require 'whitespace)
 (setq whitespace-line-column 80)
