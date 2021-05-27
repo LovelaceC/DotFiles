@@ -3,11 +3,11 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
-(setq package-selected-packages '(lsp-mode lsp-treemacs helm-lsp yasnippet
-					   yasnippet-snippets projectile hydra
-					   flycheck company avy which-key
-					   helm-xref dap-mode use-package
-					   emmet-mode lsp-ui doom-themes))
+(setq package-selected-packages '(lsp-mode lsp-treemacs helm-lsp clang-format
+					   projectile hydra flycheck company avy
+					   which-key helm-xref dap-mode
+					   use-package emmet-mode
+					   doom-themes))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
   (package-refresh-contents)
@@ -39,31 +39,31 @@
 (global-set-key [f8] 'treemacs)
 
 ; Include clang-format
-;(require 'clang-format)
-;(setq clang-format-style "gnu")
+(require 'clang-format)
+(setq clang-format-style "gnu")
 
 ; Before saving, format the code
-;(defun c-format-on-save()
-;  (add-hook 'before-save-hook #'clang-format-buffer nil 'local))
+(defun c-format-on-save()
+  (add-hook 'before-save-hook #'clang-format-buffer nil 'local))
 
 (add-hook 'c-mode-hook 'c-format-on-save)
 
 (require 'use-package)
 
-(use-package lsp-ui)
+;(use-package lsp-ui)
 
 ; lsp ui
-(add-hook 'c-mode-hook 'lsp-ui-mode)
+;(add-hook 'c-mode-hook 'lsp-ui-mode)
 
 ; lsp sideline
-(setq lsp-ui-sideline-show-diagnostics nil)
-(setq lsp-ui-sideline-show-hover t)
-(setq lsp-ui-sideline-show-code-actions t)
-(setq lsp-ui-sideline-delay 0)
+;(setq lsp-ui-sideline-show-diagnostics nil)
+;(setq lsp-ui-sideline-show-hover t)
+;(setq lsp-ui-sideline-show-code-actions t)
+;(setq lsp-ui-sideline-delay 0)
 
 ; lsp doc
-(setq lsp-ui-doc-enable t)
-(setq lsp-ui-doc-delay 0)
+;(setq lsp-ui-doc-enable t)
+;(setq lsp-ui-doc-delay 0)
 
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-screen t)
