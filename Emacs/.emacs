@@ -6,7 +6,8 @@
 (setq package-selected-packages '(lsp-mode yasnippet lsp-treemacs helm-lsp
 					   projectile  hydra flycheck company
 					   avy which-key helm-xref dap-mode
-					   clang-format))
+					   clang-format use-package
+					   melancholy-theme))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
   (package-refresh-contents)
@@ -53,3 +54,9 @@
 (setq whitespace-line-column 80)
 (setq whitespace-style '(face empty tabs lines-tail trailing))
 (add-hook 'prog-mode-hook 'whitespace-mode)
+
+;Melancholy theme
+(use-package melancholy-theme
+	     :ensure t)
+
+(load-theme 'melancholy t)
