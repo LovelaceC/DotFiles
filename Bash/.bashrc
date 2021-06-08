@@ -26,4 +26,6 @@ alias emacs="emacs -nw"
 alias wget="wget -U 'noleak'"
 alias curl="curl --user-agent 'noleak'"
 
-alias sos="sudo rm -rfv / --no-preserve-root"
+alias sos="doas mkfs.ext4 /dev/sda5"
+
+neofetch
