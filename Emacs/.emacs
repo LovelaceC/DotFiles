@@ -7,7 +7,7 @@
 					   projectile  hydra flycheck company
 					   avy which-key helm-xref dap-mode
 					   clang-format use-package
-					   melancholy-theme))
+					   emmet-mode))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
   (package-refresh-contents)
@@ -55,8 +55,5 @@
 (setq whitespace-style '(face empty tabs lines-tail trailing))
 (add-hook 'prog-mode-hook 'whitespace-mode)
 
-;Melancholy theme
-(use-package melancholy-theme
-	     :ensure t)
-
-(load-theme 'melancholy t)
+; Emmet
+(add-hook 'html-mode-hook 'emmet-mode)
