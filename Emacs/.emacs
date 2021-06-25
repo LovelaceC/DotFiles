@@ -35,10 +35,9 @@
   (require 'dap-cpptools)
   (yas-global-mode))
 
-(global-set-key [f8] 'treemacs)
+;; Before saving, format the code
 (setq clang-format-style "gnu")
 
-; Before saving, format the code
 (defun c-format-on-save ()
   (add-hook 'before-save-hook #'clang-format-buffer nil 'local))
 
@@ -53,7 +52,14 @@
 (require 'whitespace)
 (setq whitespace-line-column 80)
 (setq whitespace-style '(face empty tabs lines-tail trailing))
-(add-hook 'prog-mode-hook 'whitespace-mode)
 
-; Emmet
+;; I don't want whitespace to be enabled in every language, so I will set them
+;; manually
+(add-hook 'c-mode-hook 'whitespace-mode)
+(add-hook 'emacs-lisp-mode-hook 'whitespace-mode)
+
+;; Emmet
 (add-hook 'html-mode-hook 'emmet-mode)
+
+;; Execute treemacs automatically
+(treemacs)
