@@ -10,7 +10,7 @@
 					   projectile  hydra flycheck company
 					   avy which-key helm-xref dap-mode
 					   clang-format use-package
-					   emmet-mode))
+					   emmet-mode emms))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
   (package-refresh-contents)
@@ -95,3 +95,6 @@
 (setq emms-source-file-default-directory "~/Music/")
 (setq emms-info-functions '(emms-info-tinytag))
 (setq emms-browser-covers 'emms-browser-cache-thumbnail-async)
+
+(load "~/.emacs.d/lisp/aanila-theme") ; aanila theme
+(load-theme 'aanila t)
