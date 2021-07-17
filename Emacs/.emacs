@@ -85,3 +85,13 @@
  (require 'erc-highlight-nicknames)
  (add-to-list 'erc-modules 'highlight-nicknames)
  (erc-update-modules))
+
+;; EMMS
+(require 'emms-setup)
+
+(emms-all)
+(emms-default-players)
+
+(setq emms-source-file-default-directory "~/Music/")
+(setq emms-info-functions '(emms-info-tinytag))
+(setq emms-browser-covers 'emms-browser-cache-thumbnail-async)
