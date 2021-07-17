@@ -1,5 +1,8 @@
 (require 'package)
+
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+(setq debug-on-error t)
+
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 
@@ -57,9 +60,28 @@
 ;; manually
 (add-hook 'c-mode-hook 'whitespace-mode)
 (add-hook 'emacs-lisp-mode-hook 'whitespace-mode)
+(add-hook 'markdown-mode-hook 'whitespace-mode)
 
 ;; Emmet
 (add-hook 'html-mode-hook 'emmet-mode)
 
-;; Execute treemacs automatically
-(treemacs)
+;; When pressing <f8> treemacs is opened
+(global-set-key [f8] 'treemacs)
+
+;; Save temporary files somewhere else
+(setq auto-save-file-name-transforms
+      `((".*" ,(concat user-emacs-directory "auto-save/") t)))
+
+(setq backup-directory-alist
+      `(("." . ,(expand-file-name
+		 (concat user-emacs-directory "backups")))))
+
+;; ERC related stuff
+(load "~/.emacs.d/lisp/accounts") ; ERC Configs
+(load "~/.emacs.d/lisp/bassobot") ; A very basic ERC bot
+(load "~/.emacs.d/lisp/erc-highlight-nicknames") ; A "plugin"(?) for ERC
+
+(and
+ (require 'erc-highlight-nicknames)
+ (add-to-list 'erc-modules 'highlight-nicknames)
+ (erc-update-modules))
