@@ -10,7 +10,8 @@
 					   projectile  hydra flycheck company
 					   avy which-key helm-xref dap-mode
 					   clang-format use-package
-					   emmet-mode emms magit))
+					   emmet-mode emms magit all-the-icons
+					   treemacs-all-the-icons doom-themes))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
   (package-refresh-contents)
@@ -100,12 +101,17 @@
  (erc-update-modules))
 
 ;; Theme
-(load "~/.emacs.d/lisp/aanila-theme")
-(load-theme 'aanila t)
+(require 'doom-themes)
+(load-theme 'doom-acario-light t)
 
 ;; Magit
 (require 'magit)
 (global-set-key [f7] 'magit) ;; When [f7] is pressed, magit is opened
 
 ;; Decrease font size
-(set-face-attribute 'default nil :height 90)
+(set-face-attribute 'default nil :height 80)
+
+;; All the icons
+(require 'all-the-icons)
+(require 'treemacs-all-the-icons)
+(treemacs-load-theme "all-the-icons")
