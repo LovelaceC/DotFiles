@@ -2,6 +2,7 @@
 
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (setq debug-on-error t)
+(setq inhibit-compacting-font-caches t)
 
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
@@ -115,3 +116,13 @@
 (require 'all-the-icons)
 (require 'treemacs-all-the-icons)
 (treemacs-load-theme "all-the-icons")
+
+;; Doom modeline
+(require 'doom-modeline)
+(doom-modeline-mode 1)
+
+(setq doom-modeline-height 25)
+(setq doom-modeline-project-detection 'projectile)
+(setq doom-modeline-icon (display-graphic-p))
+(setq doom-modeline-buffer-modification-icon t)
+(setq doom-modeline-minor-modes t)
