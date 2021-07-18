@@ -2,7 +2,8 @@
 
 (defcustom mrs-commands
   (append '((test . mrs-command-test)
-	    (info . mrs-command-info)))
+	    (info . mrs-command-info)
+	    (song . mrs-command-song)))
   "An associative list of command names and functions to call in the format of:
 ((command-name-symbol . (lambda () ...))
 (command-name-symbol2 . 'funname))"
@@ -25,6 +26,10 @@
 (defun mrs-command-info (data &rest args)
   (mrs-send (erc-response.sender data)
 	    (list "Hello. I am MrsBot.")))
+
+(defun mrs-command-song (data &rest args)
+  (mrs-send (erc-response.sender data)
+	    (list (emms-show))))
 
 (defun mrs-erc-hook (string)
   "Hooks into ERC"

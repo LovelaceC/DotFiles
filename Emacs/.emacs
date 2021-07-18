@@ -10,7 +10,7 @@
 					   projectile  hydra flycheck company
 					   avy which-key helm-xref dap-mode
 					   clang-format use-package
-					   emmet-mode emms))
+					   emmet-mode emms magit))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
   (package-refresh-contents)
@@ -76,16 +76,6 @@
       `(("." . ,(expand-file-name
 		 (concat user-emacs-directory "backups")))))
 
-;; ERC related stuff
-(load "~/.emacs.d/lisp/accounts") ; ERC Configs
-(load "~/.emacs.d/lisp/bassobot") ; A very basic ERC bot
-(load "~/.emacs.d/lisp/erc-highlight-nicknames") ; A "plugin"(?) for ERC
-
-(and
- (require 'erc-highlight-nicknames)
- (add-to-list 'erc-modules 'highlight-nicknames)
- (erc-update-modules))
-
 ;; EMMS
 (require 'emms-setup)
 
@@ -96,5 +86,20 @@
 (setq emms-info-functions '(emms-info-tinytag))
 (setq emms-browser-covers 'emms-browser-cache-thumbnail-async)
 
-(load "~/.emacs.d/lisp/aanila-theme") ; aanila theme
+;; ERC related stuff
+(load "~/.emacs.d/lisp/accounts") ; ERC Configs
+(load "~/.emacs.d/lisp/bassobot") ; A very basic ERC bot
+(load "~/.emacs.d/lisp/erc-highlight-nicknames") ; A "plugin"(?) for ERC
+
+(and
+ (require 'erc-highlight-nicknames)
+ (add-to-list 'erc-modules 'highlight-nicknames)
+ (erc-update-modules))
+
+;; Theme
+(load "~/.emacs.d/lisp/aanila-theme")
 (load-theme 'aanila t)
+
+;; Magit
+(require 'magit)
+(global-set-key [f7] 'magit) ;; When [f7] is pressed, magit is opened
