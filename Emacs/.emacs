@@ -106,3 +106,6 @@
 ;; Magit
 (require 'magit)
 (global-set-key [f7] 'magit) ;; When [f7] is pressed, magit is opened
+
+;; Decrease font size
+(set-face-attribute 'default nil :height 90)
