@@ -86,6 +86,9 @@
 (setq emms-info-functions '(emms-info-tinytag))
 (setq emms-browser-covers 'emms-browser-cache-thumbnail-async)
 
+;; Sauron
+(require 'sauron)
+
 ;; ERC related stuff
 (load "~/.emacs.d/lisp/accounts") ; ERC Configs
 (load "~/.emacs.d/lisp/bassobot") ; A very basic ERC bot

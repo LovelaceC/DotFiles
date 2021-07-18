@@ -3,7 +3,8 @@
 (defcustom mrs-commands
   (append '((test . mrs-command-test)
 	    (info . mrs-command-info)
-	    (song . mrs-command-song)))
+	    (song . mrs-command-song)
+	    (poke . mrs-command-poke)))
   "An associative list of command names and functions to call in the format of:
 ((command-name-symbol . (lambda () ...))
 (command-name-symbol2 . 'funname))"
@@ -30,6 +31,14 @@
 (defun mrs-command-song (data &rest args)
   (mrs-send (erc-response.sender data)
 	    (list (emms-show))))
+
+(defun mrs-command-poke (data &rest args)
+  (message "%s %s"
+	   (car (erc-parse-user (erc-response.sender data)))
+	   (erc-parse-user (erc-response.sender data)))
+  (sauron-add-event 'mrsbot
+		    5
+		    (concat "MASTER! " (car (erc-parse-user (erc-response.sender data))) " Sent you a ping in ERC.")))
 
 (defun mrs-erc-hook (string)
   "Hooks into ERC"
