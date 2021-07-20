@@ -13,7 +13,7 @@
 					   clang-format use-package
 					   emmet-mode emms magit all-the-icons
 					   treemacs-all-the-icons sauron
-					   pdf-tools))
+					   pdf-tools dracula-theme))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
   (package-refresh-contents)
@@ -114,7 +114,12 @@
 (require 'treemacs-all-the-icons)
 (treemacs-load-theme "all-the-icons")
 
+;; PDF-Tools
 (pdf-loader-install)
 
+;; Flyspell
 (add-hook 'text-mode-hook 'flyspell-mode)
 (add-hook 'prog-mode 'flyspell-prog-mode)
+
+;; Dracula theme
+(load-theme 'dracula t)
