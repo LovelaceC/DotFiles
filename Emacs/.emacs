@@ -12,7 +12,8 @@
 					   avy which-key helm-xref dap-mode
 					   clang-format use-package
 					   emmet-mode emms magit all-the-icons
-					   treemacs-all-the-icons doom-themes))
+					   treemacs-all-the-icons sauron
+					   pdf-tools))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
   (package-refresh-contents)
@@ -101,10 +102,6 @@
  (add-to-list 'erc-modules 'highlight-nicknames)
  (erc-update-modules))
 
-;; Theme
-(require 'doom-themes)
-(load-theme 'doom-acario-light t)
-
 ;; Magit
 (require 'magit)
 (global-set-key [f7] 'magit) ;; When [f7] is pressed, magit is opened
@@ -117,12 +114,4 @@
 (require 'treemacs-all-the-icons)
 (treemacs-load-theme "all-the-icons")
 
-;; Doom modeline
-(require 'doom-modeline)
-(doom-modeline-mode 1)
-
-(setq doom-modeline-height 25)
-(setq doom-modeline-project-detection 'projectile)
-(setq doom-modeline-icon (display-graphic-p))
-(setq doom-modeline-buffer-modification-icon t)
-(setq doom-modeline-minor-modes t)
+(pdf-loader-install)
