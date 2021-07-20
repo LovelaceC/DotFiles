@@ -115,3 +115,6 @@
 (treemacs-load-theme "all-the-icons")
 
 (pdf-loader-install)
+
+(add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'prog-mode 'flyspell-prog-mode)
