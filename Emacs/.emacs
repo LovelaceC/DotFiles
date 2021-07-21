@@ -94,7 +94,6 @@
 
 ;; ERC related stuff
 (load "~/.emacs.d/lisp/accounts") ; ERC Configs
-(load "~/.emacs.d/lisp/bassobot") ; A very basic ERC bot
 (load "~/.emacs.d/lisp/erc-highlight-nicknames") ; A "plugin"(?) for ERC
 
 (and
@@ -123,3 +122,5 @@
 
 ;; Dracula theme
 (load-theme 'dracula t)
+
+(load "~/.emacs.d/lisp/bassobot") ; A very basic ERC bot

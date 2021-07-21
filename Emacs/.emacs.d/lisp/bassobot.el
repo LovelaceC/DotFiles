@@ -1,3 +1,6 @@
+(load "~/.emacs.d/lisp/faith")
+(require 'faith)
+
 (defconst mrs-invocation "MrsBot")
 
 (defcustom mrs-commands
@@ -5,7 +8,8 @@
 	    (info . mrs-command-info)
 	    (song . mrs-command-song)
 	    (poke . mrs-command-poke)
-	    (uptime . mrs-command-uptime)))
+	    (uptime . mrs-command-uptime)
+	    (faith . mrs-command-faith)))
   "An associative list of command names and functions to call in the format of:
 ((command-name-symbol . (lambda () ...))
 (command-name-symbol2 . 'funname))"
@@ -36,15 +40,13 @@
 		  "poke: displays a message in my mini buffer with your name,"
 		  "use this when I've been too afk, you want to call my"
 		  "attention or just want to annoy me."
-		  "uptime: displays the uptime of my current emacs process")))
+		  "uptime: displays the uptime of my current emacs process"
+		  "faith: a command to reinforce and spread faith in the ONE"
+		  "TRUE EDITOR")))
 
 (defun mrs-command-song (data &rest args)
   (mrs-send (erc-response.sender data)
 	    (list (emms-show))))
-
-(defun mrs-command-uptime (data &rest args)
-  (mrs-send (erc-response.sender data)
-	    (list (emacs-uptime))))
 
 (defun mrs-command-poke (data &rest args)
   (message "%s %s"
@@ -53,6 +55,14 @@
   (sauron-add-event 'mrsbot
 		    5
 		    (concat "MASTER! " (car (erc-parse-user (erc-response.sender data))) " Sent you a ping in ERC.")))
+
+(defun mrs-command-uptime (data &rest args)
+  (mrs-send (erc-response.sender data)
+	    (list (emacs-uptime))))
+
+(defun mrs-command-faith (data &rest args)
+  (mrs-send (erc-response.sender data)
+	    (list (faith-quote))))
 
 (defun mrs-erc-hook (string)
   "Hooks into ERC"
