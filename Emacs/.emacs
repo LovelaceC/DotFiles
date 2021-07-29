@@ -13,7 +13,7 @@
 					   clang-format use-package
 					   emmet-mode emms magit all-the-icons
 					   treemacs-all-the-icons sauron
-					   pdf-tools dracula-theme))
+					   pdf-tools dracula-theme helm-emms))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
   (package-refresh-contents)
@@ -86,8 +86,15 @@
 (emms-default-players)
 
 (setq emms-source-file-default-directory "~/Music/")
-(setq emms-info-functions '(emms-info-tinytag))
+(setq emms-info-functions '(emms-info-native))
 (setq emms-browser-covers 'emms-browser-cache-thumbnail-async)
+
+(emms-browser-make-filter
+ "all-files" (emms-browser-filter-only-type 'file))
+
+(use-package helm-emms
+  :bind
+  (("<C-f5>" . helm-emms)))
 
 ;; Sauron
 (require 'sauron)
@@ -95,6 +102,7 @@
 ;; ERC related stuff
 (load "~/.emacs.d/lisp/accounts") ; ERC Configs
 (load "~/.emacs.d/lisp/erc-highlight-nicknames") ; A "plugin"(?) for ERC
+(load "~/.emacs.d/lisp/bassobot") ; A very basic ERC bot
 
 (and
  (require 'erc-highlight-nicknames)
@@ -110,8 +118,8 @@
 
 ;; All the icons
 (require 'all-the-icons)
-(require 'treemacs-all-the-icons)
-(treemacs-load-theme "all-the-icons")
+;(require 'treemacs-all-the-icons)
+;(treemacs-load-theme "all-the-icons")
 
 ;; PDF-Tools
 (pdf-loader-install)
@@ -121,6 +129,4 @@
 (add-hook 'prog-mode 'flyspell-prog-mode)
 
 ;; Dracula theme
-(load-theme 'dracula t)
-
-(load "~/.emacs.d/lisp/bassobot") ; A very basic ERC bot
+(load-theme 'manoj-dark t)
